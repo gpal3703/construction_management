@@ -1,0 +1,99 @@
+<style>
+  body {
+    background: url('https://thumbs.dreamstime.com/b/fluffy-cat-santa-hat-red-background-empty-space-right-side-340562778.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .jumbotron {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .jumbotron h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .form-control {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 0.75rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .actions a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .actions a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="container">
+  <div class="jumbotron">
+    <h2>Log In</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: 'form-label' %>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me, class: 'form-check-input' %>
+          <%= f.label :remember_me, class: 'form-check-label' %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

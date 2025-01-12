@@ -1,0 +1,163 @@
+ <style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+  .hero {
+    height: 100vh;
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLZOaSYPiwqKdwyWk1y7_qAFfXjGzgb3Ezcg&s') no-repeat center center/cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  footer a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+  #features .feature-img {
+    width: 100%;
+    height: 250px; /* Fixed height for the images */
+    object-fit: cover; /* Ensures the image covers the container without stretching */
+    border-radius: 8px;
+  }
+
+  #features .feature-item h5 {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    color: #333;
+  }
+
+  #features .feature-item p {
+    font-size: 1rem;
+    color: #666;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <%= link_to 'BuildSmart', root_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><%= link_to 'Home', root_path, class: 'nav-link' %></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Effortless Construction Management</h1>
+  <p>Your one-stop solution for cost estimation, material planning, and project management.</p>
+  <%= link_to 'Get Started', projects_path, class: 'btn btn-primary btn-lg' %>
+</section>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.invoiceowl.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2021/12/how-to-make-an-effective-estimate-as-a-contractor.jpg.webp" class="d-block w-100" alt="Slide 1">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Accurate Material Estimation</h5>
+        <p>Plan your resources effectively and save costs.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://img.freepik.com/premium-photo/engineer-construction-man-thinking-development-building-site-with-architecture-black-male-contractor-happy-about-project-management-engineering-safety-inspection-outdoor-city_590464-178819.jpg" class="d-block w-100" alt="Slide 2">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Real-time Cost Tracking</h5>
+        <p>Stay updated with your project finances.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.istockphoto.com/id/1189913170/photo/engineer-and-businessman-handshake-at-construction-site.jpg?s=612x612&w=0&k=20&c=LAGNJv533KQKPrb71GiavOCaTKVI5IfR_QioV_t88hM=" class="d-block w-100" alt="Slide 3">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Streamlined Project Management</h5>
+        <p>Achieve efficiency and excellence in every project.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<section id="features" class="py-5 text-center">
+  <div class="container">
+    <h2 class="mb-4">Why Choose Us?</h2>
+    <div class="row">
+      <div class="col-md-4 feature-item">
+        <img src="https://img.freepik.com/free-vector/corporate-meeting-employees-cartoon-characters-discussing-business-strategy-planning-further-actions-brainstorming-formal-communication-seminar_335657-284.jpg?semt=ais_hybrid" alt="Feature 1" class="feature-img mb-3">
+        <h5>Accurate Estimation</h5>
+        <p>Get precise material and cost estimates.</p>
+      </div>
+      <div class="col-md-4 feature-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIKBTHc7Oy1--N-xp7olpzYfKKtYMfZfqx6l0_0VarJsOZi9ozPBT8JHAg7DSATkmuPmw&usqp=CAU" alt="Feature 2" class="feature-img mb-3">
+        <h5>Real-Time Updates</h5>
+        <p>Track project progress and expenses live.</p>
+      </div>
+      <div class="col-md-4 feature-item">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4bipfGxbpmBgAYkQ5ePor0AqY3chSRV3lUFx998nhDJNKindWekL3VGPSWQ08oFMi0xc&usqp=CAU" alt="Feature 3" class="feature-img mb-3">
+        <h5>Easy Collaboration</h5>
+        <p>Seamlessly connect with your team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 BuildSmart. All Rights Reserved.</p>
+  <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>

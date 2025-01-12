@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Const Management" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <style>
+      #flash-messages {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .flash-message {
+        width: auto;
+        max-width: 600px;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+
+      .flash-message.notice {
+        background-color: #28a745; /* Green for success */
+      }
+
+      .flash-message.alert {
+        background-color: #dc3545; /* Red for error */
+      }
+
+      .flash-message.warning {
+        background-color: #ffc107; /* Yellow for warnings */
+      }
+
+      .flash-message.info {
+        background-color: #17a2b8; /* Blue for info */
+      }
+
+      .flash-message .close-btn {
+        margin-left: 15px;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .flash-message .close-btn:hover {
+        color: #fff;
+      }
+
+    </style>
+  </head>
+
+  <body>
+   <div id="flash-messages">
+      <% if notice.present? %>
+        <div class="flash-message notice">
+          <%= notice %>
+          <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="flash-message alert">
+          <%= alert %>
+          <span class="close-btn" onclick="this.parentElement.style.display='none'">&times;</span>
+        </div>
+      <% end %>
+    </div>
+    <%= yield %>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const flashMessages = document.getElementById("flash-messages");
+        if (flashMessages) {
+          setTimeout(() => {
+            flashMessages.style.transition = "opacity 0.5s";
+            flashMessages.style.opacity = "0";
+            setTimeout(() => flashMessages.remove(), 500);
+          }, 5000);
+        }
+      });
+    </script>
+  </body>
+</html>
