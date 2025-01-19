@@ -17,11 +17,9 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      # Success message
       flash[:success] = "Project was successfully created!"
       redirect_to projects_path
     else
-      # Failure message
       flash[:error] = "There was an error creating the project. Please try again."
       render :new
     end
